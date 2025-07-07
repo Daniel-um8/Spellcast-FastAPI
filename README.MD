@@ -1,14 +1,14 @@
 # PROYECTO_SPELLCAST
 
-Spellcast es una API construida con FastAPI y SQLAlchemy para la gestión de usuarios, bibliotecas y libros, con soporte para almacenamiento de archivos PDF y extracción de texto.
+Spellcast es una API desarrollada con FastAPI y SQLAlchemy para la gestión de usuarios, bibliotecas y libros, permitiendo almacenar archivos PDF y extraer su contenido de texto.
 
 ## Características
 
-- **Usuarios**: Registro y gestión de usuarios.
-- **Bibliotecas**: Cada usuario puede tener múltiples bibliotecas.
-- **Libros**: Cada biblioteca puede contener múltiples libros, con soporte para almacenar la ruta de archivos PDF y su contenido extraído.
-- **Migraciones**: Gestión de migraciones de base de datos con Alembic.
-- **Variables de entorno**: Configuración segura mediante `.env`.
+- **Usuarios:** Registro y gestión de usuarios.
+- **Bibliotecas:** Cada usuario puede tener múltiples bibliotecas.
+- **Libros:** Cada biblioteca puede contener múltiples libros, con almacenamiento de la ruta del PDF y su texto extraído.
+- **Migraciones:** Gestión de migraciones de base de datos con Alembic.
+- **Variables de entorno:** Configuración segura mediante `.env`.
 
 ## Estructura del proyecto
 
@@ -19,11 +19,15 @@ PROYECTO_SPELLCAST/
 │   ├── __init__.py
 │   ├── main.py
 │   ├── database.py
+│   ├── seed.py
 │   ├── models/
 │   │   ├── __init__.py
 │   │   └── models.py
 │   └── routers/
-│       └── __init__.py
+│       ├── __init__.py
+│       ├── user.py
+│       ├── library.py
+│       └── book.py
 │
 ├── alembic/
 │   ├── env.py
@@ -32,40 +36,49 @@ PROYECTO_SPELLCAST/
 │   └── versions/
 │       └── bc75384515ca_initial_tables.py
 │
-├── .env
-├── .gitignore
+├── .env.example
 ├── alembic.ini
+├── LICENSE
+├── README.MD
 ├── requirements.txt
 ```
 
 ## Instalación
 
-1. **Clona el repositorio**  
+1. **Clona el repositorio**
    ```sh
    git clone <url-del-repositorio>
    cd PROYECTO_SPELLCAST
    ```
 
-2. **Crea y activa un entorno virtual**  
+2. **Crea y activa un entorno virtual**
    ```sh
    python -m venv venv
-   source venv/bin/activate  # En Windows: venv\Scripts\activate
+   # En Linux/Mac:
+   source venv/bin/activate
+   # En Windows:
+   venv\Scripts\activate
    ```
 
-3. **Instala las dependencias**  
+3. **Instala las dependencias**
    ```sh
    pip install -r requirements.txt
    ```
 
-4. **Configura las variables de entorno**  
-   Edita el archivo `.env` con tu cadena de conexión a la base de datos PostgreSQL.
+4. **Configura las variables de entorno**
+   - Copia `.env.example` a `.env` y edítalo con tu cadena de conexión a PostgreSQL.
 
-5. **Ejecuta las migraciones**  
+5. **Ejecuta las migraciones**
    ```sh
    alembic upgrade head
    ```
 
-6. **Inicia el servidor**  
+6. **(Opcional) Inserta datos de prueba**
+   ```sh
+   python app/seed.py
+   ```
+
+7. **Inicia el servidor**
    ```sh
    uvicorn app.main:app --reload
    ```
@@ -77,10 +90,10 @@ Accede a la documentación interactiva de la API en:
 
 ## Estructura de la base de datos
 
-- **users**: Usuarios registrados.
-- **libraries**: Bibliotecas asociadas a usuarios.
-- **books**: Libros asociados a bibliotecas.
+- **users:** Usuarios registrados.
+- **libraries:** Bibliotecas asociadas a usuarios.
+- **books:** Libros asociados a bibliotecas.
 
 ## Licencia
 
-Este proyecto está bajo la licencia MIT.
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.

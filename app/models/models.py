@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Text, DateTime
+from sqlalchemy_utils import URLType
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.database import Base
@@ -27,7 +28,7 @@ class Book(Base):
     id = Column(Integer, primary_key=True, index=True)
     library_id = Column(Integer, ForeignKey("libraries.id"))
     title = Column(String, nullable=False)
-    pdf_file_path = Column(String)
+    pdf_file_path = Column(URLType, nullable=False)
     text_content = Column(Text)
     created_at = Column(DateTime, default=datetime.utcnow)
 
