@@ -1,0 +1,26 @@
+# Entorno virtual
+venv/
+__pycache__/
+*.pyc
+
+# Archivos de base de datos SQLite (si llegas a usar)
+*.sqlite3
+*.db
+
+# Logs
+*.log
+
+# Variables de entorno
+.env
+.env.*
+
+# Migraciones Alembic - NO ignorar la carpeta alembic/versions porque ahí están los scripts
+
+# IDEs y editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Otros
+.DS_Store
